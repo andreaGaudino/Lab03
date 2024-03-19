@@ -1,5 +1,6 @@
 class Dictionary:
     def __init__(self):
+        self._dict = []
         pass
 
     def loadDictionary(self,path):
