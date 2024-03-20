@@ -5,9 +5,17 @@ import multiDictionary as md
 class SpellChecker:
 
     def __init__(self):
+        self.parole = md.MultiDictionary()
         pass
 
     def handleSentence(self, txtIn, language):
+        lista_finale = []
+        text = replaceChars(txtIn)
+        self.parole = self.parole.searchWord(text, language)
+        for i in self.parole:
+            if i._corretta == False:
+                lista_finale.append(i)
+        return lista_finale
         pass
 
     def printMenu(self):

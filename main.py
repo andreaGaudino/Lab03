@@ -1,9 +1,11 @@
 import spellchecker
 
-sc = spellchecker.SpellChecker()
+
 
 while(True):
+    sc = spellchecker.SpellChecker()
     sc.printMenu()
+
 
     txtIn = input()
     # Add input control here!
@@ -11,19 +13,28 @@ while(True):
     if int(txtIn) == 1:
         print("Inserisci la tua frase in Italiano\n")
         txtIn = input()
-        sc.handleSentence(txtIn,"italian")
+        lista = sc.handleSentence(txtIn,"italian")
+        print("Using Contains:")
+        for i in lista:
+            print(i._parola)
         continue
 
     if int(txtIn) == 2:
         print("Inserisci la tua frase in Inglese\n")
         txtIn = input()
-        sc.handleSentence(txtIn,"english")
+        lista = sc.handleSentence(txtIn,"english")
+        print("Using Contains:")
+        for i in lista:
+            print(i._parola)
         continue
 
     if int(txtIn) == 3:
         print("Inserisci la tua frase in Spagnolo\n")
         txtIn = input()
-        sc.handleSentence(txtIn,"spanish")
+        lista = sc.handleSentence(txtIn,"spanish")
+        print("Using Contains:")
+        for i in lista:
+            print(i._parola)
         continue
 
     if int(txtIn) == 4:
