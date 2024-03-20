@@ -9,13 +9,42 @@ class SpellChecker:
         pass
 
     def handleSentence(self, txtIn, language):
-        lista_finale = []
+        lista = []
         text = replaceChars(txtIn)
-        self.parole = self.parole.searchWord(text, language)
-        for i in self.parole:
+        start_time = time.time()
+        lista_finale = []
+        risultato = self.parole.searchWord(text, language)
+        for i in risultato:
             if i._corretta == False:
                 lista_finale.append(i)
-        return lista_finale
+        end_time = time.time()
+        intervallo_tempo_contains = end_time-start_time
+        lista.append((lista_finale, intervallo_tempo_contains))
+
+        self.parole = md.MultiDictionary()
+        start_time = time.time()
+        lista_finale = []
+        risultato = self.parole.searchWordLinear(text, language)
+        for i in risultato:
+            if i._corretta == False:
+                lista_finale.append(i)
+        end_time = time.time()
+        intervallo_tempo_lineare = end_time-start_time
+        lista.append((lista_finale, intervallo_tempo_lineare))
+
+        self.parole = md.MultiDictionary()
+        start_time = time.time()
+        lista_finale = []
+        risultato = self.parole.searchWordDichotomic(text, language)
+        for i in risultato:
+            if i._corretta == False:
+                lista_finale.append(i)
+        end_time = time.time()
+        intervallo_tempo_lineare = end_time - start_time
+        lista.append((lista_finale, intervallo_tempo_lineare))
+
+
+        return lista
         pass
 
     def printMenu(self):
@@ -31,7 +60,7 @@ class SpellChecker:
 
 
 def replaceChars(text):
-    chars = "\\`*_{}[]()>#+-.!$%^;,=_~"
+    chars = "\\`*_{}[]()>#+-.?!$%^;,=_~"
     for c in chars:
         text = text.replace(c, "")
     return text
